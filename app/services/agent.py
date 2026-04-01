@@ -1,11 +1,13 @@
 from langchain.agents import create_agent
 from langgraph.checkpoint.memory import InMemorySaver
+from app.tools.sql_search import sql_query
 
 def init_agent(model, system_instruction):
     agent = create_agent(
         model=model,
         system_prompt=system_instruction,
-        tools=[],
+        tools=[sql_query],                  
         checkpointer=InMemorySaver()
     )
     return agent
+        
